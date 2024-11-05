@@ -149,6 +149,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
         produto.setStatus(status);
         
         ProdutosDAO produtodao = new ProdutosDAO();
+        produtodao.conectar();
         produtodao.cadastrarProduto(produto);
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
