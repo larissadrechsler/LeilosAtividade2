@@ -12,13 +12,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ProdutosDAO {
 
     Connection conn;
     PreparedStatement st;
-    ResultSet resultset;
+    ResultSet rs;
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
 
     public boolean conectar() {
@@ -55,8 +56,27 @@ public class ProdutosDAO {
     }
 
     public ArrayList<ProdutosDTO> listarProdutos() {
+        try {
+            st = conn.prepareStatement("SELECT * FROM produtos");
+            rs = st.executeQuery();
 
-        return listagem;
+            while (rs.next()) {
+                ProdutosDTO produto = new ProdutosDTO();
+
+                produto.setId(rs.getInt("id"));
+                produto.setNome(rs.getString("nome"));
+                produto.setValor(rs.getInt("valor"));
+                produto.setStatus(rs.getString("status"));
+
+                listagem.add(produto);
+                System.out.println(produto);
+            }
+            return listagem;
+
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
 }
