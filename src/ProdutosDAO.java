@@ -103,7 +103,7 @@ public class ProdutosDAO {
 
     }
     
-    public void atualizar(int id) {
+    public void venderProduto(int id) {
 
         try {
             st = conn.prepareStatement("UPDATE produtos SET status = 'Vendido' where id = ?");
